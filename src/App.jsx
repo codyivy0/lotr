@@ -6,9 +6,11 @@ const KEY = "4g23RSCL1MEPDiQ8jwNl";
 const API_URL = "https://the-one-api.dev/v2";
 
 function App() {
+  const [quote, setQuote] = useState('')
   useEffect(() => {
     async function fetchBooks() {
-      const endpoint = "movie";
+      const endpoint = "quote";
+      const randomNumber = Math.floor(Math.random() * 1000) + 1;
 
       const headers = {
         Authorization: `Bearer ${KEY}`,
@@ -27,7 +29,7 @@ function App() {
 
         const data = await response.json();
 
-        console.log(data);
+        setQuote(data.docs[randomNumber].dialog);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -38,7 +40,7 @@ function App() {
 
   return (
     <>
-      <h1>hey</h1>
+      <h1>{quote} </h1>
     </>
   );
 }
